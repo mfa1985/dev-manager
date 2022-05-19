@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  dev-manager-db:
+    image: mysql:5.6
+    container_name: dev-manager-db
+    restart: always
+    ports:
+      - 3306:3306
+    volumes:
+      - ./dev-manager-db/:/var/lib/mysql
+    environment:
+      MYSQL_PASSWORD: 123
+      MYSQL_ROOT_PASSWORD: 123
+      MYSQL_DATABASE: dev-manager
