@@ -1,26 +1,44 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreateNivelDto } from './dto/create-nivel.dto';
 import { UpdateNivelDto } from './dto/update-nivel.dto';
+import { Nivel } from './entities/nivel.entity';
 
 @Injectable()
 export class NivelService {
+
+  constructor(
+      @InjectRepository(Nivel)
+      private nivelRepository: Repository<Nivel>,
+  ){}
+
   create(createNivelDto: CreateNivelDto) {
-    return 'This action adds a new nivel';
+    return this.nivelRepository.save(createNivelDto);
   }
 
   findAll() {
-    return `This action returns all nivel`;
+    return this.nivelRepository.find();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} nivel`;
+    return this.nivelRepository.findOne(id);
   }
 
   update(id: number, updateNivelDto: UpdateNivelDto) {
-    return `This action updates a #${id} nivel`;
+    return this.nivelRepository.update(id, this.nivelFromDTO(updateNivelDto)).then(() => {
+      return this.nivelRepository.findOne(id);
+    });
   }
 
   remove(id: number) {
-    return `This action removes a #${id} nivel`;
+    return this.nivelRepository.delete(id);
   }
+
+  nivelFromDTO(nivelDTO:CreateNivelDto|UpdateNivelDto) {
+    const nivel = new Nivel();
+    nivel.nivel = nivelDTO.nivel;
+    return nivelDTO;
+  }
+  
 }
