@@ -29,8 +29,16 @@ export class DesenvolvedorController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.devService.findOne(+id);
+  async findOne(@Param('id') id: string, @Res() res: Response) {
+    try {
+      const dev = await this.devService.findOne(+id);
+      if(dev){
+        return res.status(HttpStatus.OK).json(dev);
+      }
+      return res.status(HttpStatus.NO_CONTENT).send();
+    } catch (error) {
+      return res.status(HttpStatus.BAD_REQUEST).send(error);
+    }
   }
 
   @Put(':id')

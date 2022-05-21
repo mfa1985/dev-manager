@@ -33,8 +33,16 @@ export class NivelController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.nivelService.findOne(+id);
+  async findOne(@Param('id') id: string, @Res() res: Response) {
+    try {
+      const nivel = await this.nivelService.findOne(+id);
+      if(nivel){
+        return res.status(HttpStatus.OK).json(nivel);
+      }
+      return res.status(HttpStatus.NO_CONTENT).send();
+    } catch (error) {
+      return res.status(HttpStatus.BAD_REQUEST).send(error);
+    }
   }
 
   @Put(':id')
