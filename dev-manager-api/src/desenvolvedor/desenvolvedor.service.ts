@@ -45,4 +45,8 @@ export class DesenvolvedorService {
     dev.hobby = devDTO.hobby;
     return dev;
   }
+
+  count(id: number){
+    return this.devRepository.count({where:{nivel: id}});
+  }
 }

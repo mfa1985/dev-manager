@@ -24,8 +24,7 @@ export class Desenvolvedor {
     @MaxLength(1, { message: "Nome do desenvolvedor deve ter no máximo 1 caracter!"})
     @Column({
         type: "varchar",
-        length: 1,
-        unique: true
+        length: 1
     })
     sexo: string;
 
