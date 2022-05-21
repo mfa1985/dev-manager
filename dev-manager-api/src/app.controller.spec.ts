@@ -15,8 +15,8 @@ describe('AppController', () => {
   });
 
   describe('root', () => {
-    it('should return "Hello World!"', () => {
-      expect(appController.getHello()).toBe('Hello World!');
+    it('should return "Seja bem vindo ao Gerenciador de Desenvolvedores"', () => {
+      expect(appController.getHello()).toBe('Seja bem vindo ao Gerenciador de Desenvolvedores');
     });
   });
 });
