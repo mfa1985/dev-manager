@@ -5,8 +5,10 @@ import { UpdateNivelDto } from './dto/update-nivel.dto';
 import { validate } from 'class-validator';
 import { Response } from 'express';
 import { DesenvolvedorService } from 'src/desenvolvedor/desenvolvedor.service';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('nivel')
+@ApiTags('nivel')
 export class NivelController {
   constructor(
     private readonly nivelService: NivelService,

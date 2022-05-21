@@ -1,4 +1,5 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Res, HttpStatus, Put } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { validate } from 'class-validator';
 import { Response } from 'express';
 import { DesenvolvedorService } from './desenvolvedor.service';
@@ -6,6 +7,7 @@ import { CreateDesenvolvedorDto } from './dto/create-desenvolvedor.dto';
 import { UpdateDesenvolvedorDto } from './dto/update-desenvolvedor.dto';
 
 @Controller('desenvolvedor')
+@ApiTags('desenvolvedor')
 export class DesenvolvedorController {
   constructor(private readonly devService: DesenvolvedorService) {}
 
