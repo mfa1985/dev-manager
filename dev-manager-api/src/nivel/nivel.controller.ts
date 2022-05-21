@@ -12,7 +12,7 @@ export class NivelController {
   @Post()
   async create(@Body() createNivelDto: CreateNivelDto, @Res() res: Response): Promise<any>  {
     try {
-      const error = await validate(this.nivelService.nivelFromDTO(createNivelDto));
+      const error = await validate(createNivelDto);
       if (error.length > 0) {
         return res.status(HttpStatus.BAD_REQUEST).send(error);
       }
