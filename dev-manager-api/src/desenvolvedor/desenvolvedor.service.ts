@@ -1,26 +1,48 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreateDesenvolvedorDto } from './dto/create-desenvolvedor.dto';
 import { UpdateDesenvolvedorDto } from './dto/update-desenvolvedor.dto';
+import { Desenvolvedor } from './entities/desenvolvedor.entity';
 
 @Injectable()
 export class DesenvolvedorService {
+
+  constructor(
+    @InjectRepository(Desenvolvedor)
+    private devRepository: Repository<Desenvolvedor>,
+  ) { }
+
   create(createDesenvolvedorDto: CreateDesenvolvedorDto) {
-    return 'This action adds a new desenvolvedor';
+    return this.devRepository.save(createDesenvolvedorDto);
   }
 
   findAll() {
-    return `This action returns all desenvolvedor`;
+    return this.devRepository.find();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} desenvolvedor`;
+    return this.devRepository.findOne(id);
   }
 
   update(id: number, updateDesenvolvedorDto: UpdateDesenvolvedorDto) {
-    return `This action updates a #${id} desenvolvedor`;
+    return this.devRepository.update(id, this.desenvolvedorFromDTO(updateDesenvolvedorDto)).then(() => {
+      return this.devRepository.findOne(id);
+    });
   }
 
   remove(id: number) {
-    return `This action removes a #${id} desenvolvedor`;
+    return this.devRepository.delete(id);
+  }
+
+  desenvolvedorFromDTO(devDTO: CreateDesenvolvedorDto | UpdateDesenvolvedorDto) {
+    const dev = new Desenvolvedor();
+    dev.nivel = devDTO.nivel;
+    dev.nome = devDTO.nome;
+    dev.sexo = devDTO.sexo;
+    dev.datanascimento = devDTO.datanascimento;
+    dev.idade = devDTO.idade;
+    dev.hobby = devDTO.hobby;
+    return dev;
   }
 }

@@ -38,7 +38,7 @@ export class NivelService {
   nivelFromDTO(nivelDTO:CreateNivelDto|UpdateNivelDto) {
     const nivel = new Nivel();
     nivel.nivel = nivelDTO.nivel;
-    return nivelDTO;
+    return nivel;
   }
   
 }

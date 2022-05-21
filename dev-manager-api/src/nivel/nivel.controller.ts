@@ -12,7 +12,8 @@ export class NivelController {
   @Post()
   async create(@Body() createNivelDto: CreateNivelDto, @Res() res: Response): Promise<any>  {
     try {
-      const error = await validate(createNivelDto);
+      // const error = await validate(createNivelDto);
+      const error = await validate(this.nivelService.nivelFromDTO(createNivelDto));
       if (error.length > 0) {
         return res.status(HttpStatus.BAD_REQUEST).send(error);
       }
@@ -60,7 +61,6 @@ export class NivelController {
         await this.nivelService.remove(+id);
         return res.status(HttpStatus.NO_CONTENT).send();
       } catch (error) {
-        console.log(error);
         return res.status(HttpStatus.BAD_REQUEST).json(error);
       }
     } else {
