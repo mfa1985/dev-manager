@@ -18,7 +18,7 @@ export class DesenvolvedorService {
   }
 
   findAll() {
-    return this.devRepository.find();
+    return this.devRepository.find({ relations: ['nivel']});
   }
 
   findOne(id: number) {

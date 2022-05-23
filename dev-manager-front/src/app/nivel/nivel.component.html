@@ -1,12 +1,12 @@
 <div class="container">
     <div class="row">
         <div class="col-md-9">
-          <h4>Listagem de Níveis</h4>
+            <h4>Listagem de Níveis</h4>
         </div>
         <div class="col-md-3 text-end">
-          <button class="btn btn-primary m-b-0 px-5 py-2" (click)="inserirNivel()">
-            Adicionar
-          </button>
+            <button class="btn btn-primary m-b-0 px-5 py-2" (click)="inserirNivel()">
+                Adicionar
+            </button>
         </div>
     </div>
     <br>
@@ -14,8 +14,8 @@
         <table class="table table-dark text-center">
             <thead>
                 <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Nível</th>
+                    <th scope="col" (click)="ordenar(0)">Id <i class="fa fa-sort sort-btn" aria-hidden="true"></i></th>
+                    <th scope="col" (click)="ordenar(1)">Nível <i class="fa fa-sort sort-btn" aria-hidden="true"></i></th>
                     <th scope="col">Editar</th>
                     <th scope="col">Apagar</th>
                 </tr>
@@ -24,10 +24,8 @@
                 <tr *ngFor="let nivel of niveis">
                     <td>{{nivel.id}}</td>
                     <td>{{nivel.nivel}}</td>
-                    <td><button class="btn btn-outline-warning" routerLink="/nivel/editar/{{nivel.id}}"><i
-                                class="far fa-edit"></i> Editar</button></td>
-                    <td><button class="btn btn-outline-danger" (click)="apagar(nivel)"><i
-                                class="far fa-trash-alt"></i> Apagar</button></td>
+                    <td><button class="btn btn-outline-warning" routerLink="/nivel/editar/{{nivel.id}}"><i class="far fa-edit"></i> Editar</button></td>
+                    <td><button class="btn btn-outline-danger" (click)="apagar(nivel)"><i class="far fa-trash-alt"></i> Apagar</button></td>
                 </tr>
             </tbody>
         </table>

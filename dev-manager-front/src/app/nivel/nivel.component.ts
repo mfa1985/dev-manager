@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Nivel } from '../models/nivel';
+import { HelperService } from '../services/helper.service';
 import { InteractionsService } from '../services/interactions.service';
 import { NivelService } from '../services/nivel.service';
 
@@ -12,15 +13,24 @@ import { NivelService } from '../services/nivel.service';
 export class NivelComponent implements OnInit {
 
   niveis: Nivel[] = [];
+  camposOrd = ["id","nivel"];
+  tipoCampoOrd = ["number","string"];
+  sequenciaOrd = ["asc","asc"];
 
   constructor(
     private nivelService: NivelService,
     private interactionsService: InteractionsService,
-    private router: Router
+    private router: Router,
+    private helper: HelperService
   ) { }
 
   ngOnInit(): void {
     this.buscarNiveis();
+  }
+
+  ordenar(index: number) {
+    this.helper.ordenador(this.niveis, this.camposOrd[index], this.tipoCampoOrd[index], this.sequenciaOrd[index]);
+    this.sequenciaOrd[index] = (this.sequenciaOrd[index] == "asc" ? "desc" : "asc");
   }
 
   buscarNiveis(): void {
