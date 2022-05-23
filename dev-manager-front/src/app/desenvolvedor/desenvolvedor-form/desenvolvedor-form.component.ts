@@ -29,7 +29,7 @@ export class DesenvolvedorFormComponent implements OnInit {
     private router: Router
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.initForm();
     this.buscarNiveis();
     this.activatedRoute.params.subscribe(params => {
@@ -41,7 +41,7 @@ export class DesenvolvedorFormComponent implements OnInit {
           if (dev) {
             this.dev = dev;
             this.formulario.patchValue(this.dev);
-            // this.formulario.controls['nivel'].setValue(this.dev.nivel!.id);
+            this.formulario.controls['nivel'].setValue(this.dev.nivel?.id);
           } else {
             this.interactionsService.toastStatus('warning', 'Atenção!', 'O desenvolvedor que você está tentando editar não existe!', 6000);
           }

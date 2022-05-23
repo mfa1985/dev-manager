@@ -31,7 +31,7 @@ export class DesenvolvedorService {
   }
 
   findOne(id: number) {
-    return this.devRepository.findOne(id);
+    return this.devRepository.findOne(id,{ relations: ['nivel']});
   }
 
   update(id: number, updateDesenvolvedorDto: UpdateDesenvolvedorDto) {
