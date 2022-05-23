@@ -15,8 +15,12 @@ export class DesenvolvedorService {
     private httpClient: HttpClient
   ) { }
 
-  public findAll(): Observable<Desenvolvedor[]> {
-    return this.httpClient.get<Desenvolvedor[]>(`${this.api}`);
+  // public findAll(): Observable<Desenvolvedor[]> {
+  //   return this.httpClient.get<Desenvolvedor[]>(`${this.api}`);
+  // }
+
+  public findAll(queryParameters: string = ""): Observable<Desenvolvedor[]> {
+    return this.httpClient.get<Desenvolvedor[]>(`${this.api}?${queryParameters}`);
   }
 
   public findOne(id: number): Observable<Desenvolvedor> {

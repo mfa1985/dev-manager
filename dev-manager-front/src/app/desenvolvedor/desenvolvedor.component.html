@@ -1,9 +1,21 @@
 <div class="container">
     <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-4">
           <h4>Listagem de Desenvolvedores</h4>
         </div>
-        <div class="col-md-3 text-end">
+        <div class="col-md-4">
+            <div class="input-group mb-0">
+                <span class="input-group-text bg-default"><i class="fa fa-search" aria-hidden="true" id="buscar"></i></span>
+            <input type="text"
+            [(ngModel)]="filtro"
+            (ngModelChange)="filtrar()"
+            class="form-control"
+            placeholder="Buscar Desenvolvedor"
+            aria-label="Buscar Desenvolvedor"
+            aria-describedby="buscar">
+            </div>
+        </div>
+        <div class="col-md-4 text-end">
           <button class="btn btn-primary m-b-0 px-5 py-2" (click)="inserirDev()">
             Adicionar
           </button>
@@ -29,7 +41,8 @@
                 <tr *ngFor="let dev of devs; key" >
                     <td>{{dev.id}}</td>
                     <td>{{dev.nome}}</td>
-                    <td>{{dev.nivel | json}}</td>
+                    <!-- <td>{{dev.nivel | json}}</td> -->
+                    <td>{{labelNivel(dev.nivel!)}}</td>
                     <td>{{dev.datanascimento | date: 'dd/MM/yyyy'}}</td>
                     <td>{{dev.idade}}</td>
                     <td>{{dev.sexo == 'F' ? 'Feminino': dev.sexo == 'M' ? 'Masculino': ''}}</td>
@@ -41,5 +54,6 @@
                 </tr>
             </tbody>
         </table>
+        <app-paginate [metaPaginate]="paginate!" (emitParams)="buscarDevs($event)"></app-paginate>
     </div>
 </div>

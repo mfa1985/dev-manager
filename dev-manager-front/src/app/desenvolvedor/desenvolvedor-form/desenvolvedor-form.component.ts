@@ -41,6 +41,7 @@ export class DesenvolvedorFormComponent implements OnInit {
           if (dev) {
             this.dev = dev;
             this.formulario.patchValue(this.dev);
+            // this.formulario.controls['nivel'].setValue(this.dev.nivel!.id);
           } else {
             this.interactionsService.toastStatus('warning', 'Atenção!', 'O desenvolvedor que você está tentando editar não existe!', 6000);
           }
@@ -55,7 +56,7 @@ export class DesenvolvedorFormComponent implements OnInit {
   buscarNiveis(): void {
     this.nivelService.findAll().subscribe(
       data => {
-        this.niveis = data;
+        this.niveis = (<any>data).items;
         console.log("niveis", this.niveis);
       },
       error => {
@@ -124,6 +125,10 @@ export class DesenvolvedorFormComponent implements OnInit {
       }
     }
     return idade;
+  }
+
+  valueNivel(nivel: Nivel){
+    return nivel.id?.toString();
   }
 
 }

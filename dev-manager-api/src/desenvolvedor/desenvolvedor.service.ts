@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { CreateDesenvolvedorDto } from './dto/create-desenvolvedor.dto';
 import { UpdateDesenvolvedorDto } from './dto/update-desenvolvedor.dto';
 import { Desenvolvedor } from './entities/desenvolvedor.entity';
+import { IPaginationOptions, paginate, Pagination } from 'nestjs-typeorm-paginate';
 
 @Injectable()
 export class DesenvolvedorService {
@@ -19,6 +20,14 @@ export class DesenvolvedorService {
 
   findAll() {
     return this.devRepository.find({ relations: ['nivel']});
+  }
+
+  findPaginate(options: IPaginationOptions, queryParameter): Promise<Pagination<Desenvolvedor>> {
+    const query = this.devRepository.createQueryBuilder('d').leftJoinAndSelect("d.nivel", "nivel");
+    if (queryParameter){
+      query.where("d.nome like :queryParameter", {queryParameter: '%' + queryParameter + '%'}).getMany();
+    }
+    return paginate<Desenvolvedor>(query,options);
   }
 
   findOne(id: number) {

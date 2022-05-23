@@ -1,9 +1,21 @@
 <div class="container">
     <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-4">
             <h4>Listagem de Níveis</h4>
         </div>
-        <div class="col-md-3 text-end">
+        <div class="col-md-4">
+            <div class="input-group mb-0">
+                <span class="input-group-text bg-default"><i class="fa fa-search" aria-hidden="true" id="buscar"></i></span>
+            <input type="text"
+            [(ngModel)]="filtro"
+            (ngModelChange)="filtrar()"
+            class="form-control"
+            placeholder="Buscar Nível"
+            aria-label="Buscar Nível"
+            aria-describedby="buscar">
+            </div>
+        </div>
+        <div class="col-md-4 text-end">
             <button class="btn btn-primary m-b-0 px-5 py-2" (click)="inserirNivel()">
                 Adicionar
             </button>
@@ -16,6 +28,7 @@
                 <tr>
                     <th scope="col" (click)="ordenar(0)">Id <i class="fa fa-sort sort-btn" aria-hidden="true"></i></th>
                     <th scope="col" (click)="ordenar(1)">Nível <i class="fa fa-sort sort-btn" aria-hidden="true"></i></th>
+                    <th scope="col" (click)="ordenar(2)">Devs (Qtde) <i class="fa fa-sort sort-btn" aria-hidden="true"></i></th>
                     <th scope="col">Editar</th>
                     <th scope="col">Apagar</th>
                 </tr>
@@ -24,10 +37,12 @@
                 <tr *ngFor="let nivel of niveis">
                     <td>{{nivel.id}}</td>
                     <td>{{nivel.nivel}}</td>
+                    <td>{{qtdDesenvolvedores(nivel.desenvolvedores!)}}</td>
                     <td><button class="btn btn-outline-warning" routerLink="/nivel/editar/{{nivel.id}}"><i class="far fa-edit"></i> Editar</button></td>
                     <td><button class="btn btn-outline-danger" (click)="apagar(nivel)"><i class="far fa-trash-alt"></i> Apagar</button></td>
                 </tr>
             </tbody>
         </table>
+        <app-paginate [metaPaginate]="paginate!" (emitParams)="buscarNiveis($event)"></app-paginate>
     </div>
 </div>

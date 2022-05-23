@@ -1,0 +1,10 @@
+<div class="col-12 text-end">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-end c-pointer">
+            <li class="page-item" *ngFor="let page of pages; let i = index" 
+            (click)="onEmitParams(page.params)" [ngClass]="{'active': metaPaginate.currentPage == i+1}">
+                <a class="page-link" >{{ page.page }}</a>
+            </li>
+        </ul>
+    </nav>
+</div>

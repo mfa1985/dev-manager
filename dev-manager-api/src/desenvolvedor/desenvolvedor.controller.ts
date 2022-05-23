@@ -1,10 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Res, HttpStatus, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Res, HttpStatus, Put, Query } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { validate } from 'class-validator';
 import { Response } from 'express';
 import { DesenvolvedorService } from './desenvolvedor.service';
 import { CreateDesenvolvedorDto } from './dto/create-desenvolvedor.dto';
 import { UpdateDesenvolvedorDto } from './dto/update-desenvolvedor.dto';
+import { Pagination } from 'nestjs-typeorm-paginate';
+import { Desenvolvedor } from './entities/desenvolvedor.entity';
 
 @Controller('desenvolvedor')
 @ApiTags('desenvolvedor')
@@ -25,9 +27,15 @@ export class DesenvolvedorController {
     }
   }
 
+  // @Get()
+  // findAll() {
+  //   return this.devService.findAll();
+  // }
+
   @Get()
-  findAll() {
-    return this.devService.findAll();
+  async findPaginate(@Query('busca') busca, @Query('page') page = 1,  @Query('limit') limit = 100): Promise<Pagination<Desenvolvedor>> {
+    limit = limit > 100 ? 100 : limit;
+    return await this.devService.findPaginate({page, limit}, busca);
   }
 
   @Get(':id')

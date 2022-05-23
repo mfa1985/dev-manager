@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Desenvolvedor } from '../models/desenvolvedor';
 import { Nivel } from '../models/nivel';
+import { Paginate } from '../models/paginate';
 import { HelperService } from '../services/helper.service';
 import { InteractionsService } from '../services/interactions.service';
 import { NivelService } from '../services/nivel.service';
@@ -16,6 +18,9 @@ export class NivelComponent implements OnInit {
   camposOrd = ["id","nivel"];
   tipoCampoOrd = ["number","string"];
   sequenciaOrd = ["asc","asc"];
+  lastParameters: string | undefined;
+  paginate: Paginate | undefined;
+  filtro: string | undefined;
 
   constructor(
     private nivelService: NivelService,
@@ -33,11 +38,13 @@ export class NivelComponent implements OnInit {
     this.sequenciaOrd[index] = (this.sequenciaOrd[index] == "asc" ? "desc" : "asc");
   }
 
-  buscarNiveis(): void {
-    this.nivelService.findAll().subscribe(
+  async buscarNiveis(queryParameters = 'limit=10') {
+    this.lastParameters = queryParameters;
+    this.nivelService.findAll(queryParameters).subscribe(
       data => {
-        this.niveis = data;
-        console.log("niveis", this.niveis);
+        this.niveis = (<any>data).items;
+        console.log(this.niveis);
+        this.paginate = Object.assign((<any>data).meta);
       },
       error => {
         this.interactionsService.toastStatus('error', 'Erro!', 'Não foi possível buscar os resgistros!! ', 6000);
@@ -72,6 +79,15 @@ export class NivelComponent implements OnInit {
   editarNivel(id:number): void{
     console.log(`Editar id ${id}`);
     this.router.navigate([`nivel/alterar/${id}`]);
+  }
+
+  filtrar(){
+    this.lastParameters = `limit=10&busca=${this.filtro}`
+    this.buscarNiveis(this.lastParameters)
+  }
+
+  qtdDesenvolvedores(desenvolvedores: Desenvolvedor[]){
+    return desenvolvedores.length;
   }
 
 }

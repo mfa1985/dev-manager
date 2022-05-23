@@ -15,8 +15,12 @@ export class NivelService {
     private httpClient: HttpClient
   ) { }
 
-  public findAll(): Observable<Nivel[]> {
-    return this.httpClient.get<Nivel[]>(`${this.api}`);
+  // public findAll(): Observable<Nivel[]> {
+  //   return this.httpClient.get<Nivel[]>(`${this.api}`);
+  // }
+
+  public findAll(queryParameters: string = ""): Observable<Nivel[]> {
+    return this.httpClient.get<Nivel[]>(`${this.api}?${queryParameters}`);
   }
 
   public findOne(id: number): Observable<Nivel> {

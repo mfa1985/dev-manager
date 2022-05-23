@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Res, HttpStatus, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Res, HttpStatus, Put, Query } from '@nestjs/common';
 import { NivelService } from './nivel.service';
 import { CreateNivelDto } from './dto/create-nivel.dto';
 import { UpdateNivelDto } from './dto/update-nivel.dto';
@@ -6,6 +6,8 @@ import { validate } from 'class-validator';
 import { Response } from 'express';
 import { DesenvolvedorService } from 'src/desenvolvedor/desenvolvedor.service';
 import { ApiTags } from '@nestjs/swagger';
+import { Nivel } from './entities/nivel.entity';
+import { Pagination } from 'nestjs-typeorm-paginate';
 
 @Controller('nivel')
 @ApiTags('nivel')
@@ -29,9 +31,15 @@ export class NivelController {
     }
   }
 
+  // @Get()
+  // findAll() {
+  //   return this.nivelService.findAll();
+  // }
+
   @Get()
-  findAll() {
-    return this.nivelService.findAll();
+  async findPaginate(@Query('busca') busca, @Query('page') page = 1,  @Query('limit') limit = 100): Promise<Pagination<Nivel>> {
+    limit = limit > 100 ? 100 : limit;
+    return await this.nivelService.findPaginate({page, limit}, busca);
   }
 
   @Get(':id')

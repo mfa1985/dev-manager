@@ -28,7 +28,7 @@
                     <option value="" disabled selected>Selecione...</option>
                     <option *ngFor="let nivel of niveis" [value]="nivel.id">
                         {{ nivel.nivel }}
-                    </option>
+                      </option>
                 </select>
             </div>
 
@@ -47,7 +47,7 @@
             </div>
             <div class="form-group">
                 <label for="nome">Hobby</label>
-                <input type="text" class="form-control" name="hobby" id="hobby" formControlName="hobby">
+                <input type="text" class="form-control" name="hobby" id="hobby" formControlName="hobby" required>
             </div>
             <input type="submit" class="btn btn-primary mt-4" value="Salvar">
             <a href="/desenvolvedor" class="btn btn-secondary mt-4 ml-2">Cancelar</a>

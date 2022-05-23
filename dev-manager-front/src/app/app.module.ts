@@ -13,6 +13,7 @@ import { DesenvolvedorComponent } from './desenvolvedor/desenvolvedor.component'
 import { NivelComponent } from './nivel/nivel.component';
 import { NivelFormComponent } from './nivel/nivel-form/nivel-form.component';
 import { DesenvolvedorFormComponent } from './desenvolvedor/desenvolvedor-form/desenvolvedor-form.component';
+import { PaginateComponent } from './component/paginate/paginate.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { DesenvolvedorFormComponent } from './desenvolvedor/desenvolvedor-form/d
     DesenvolvedorComponent,
     NivelComponent,
     NivelFormComponent,
-    DesenvolvedorFormComponent
+    DesenvolvedorFormComponent,
+    PaginateComponent
   ],
   imports: [
     BrowserModule,
