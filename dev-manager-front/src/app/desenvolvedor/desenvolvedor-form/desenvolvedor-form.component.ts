@@ -84,7 +84,7 @@ export class DesenvolvedorFormComponent implements OnInit {
         this.devService.create(novoNivel).subscribe(
           () => {
             this.interactionsService.toastStatus('success', 'Sucesso!', 'Desenvolvedor inserido com sucesso!!', 3000);
-            this.router.navigate(["nivel"]);
+            this.router.navigate(["desenvolvedor"]);
           },
           error => {
             console.log(error);
@@ -97,7 +97,7 @@ export class DesenvolvedorFormComponent implements OnInit {
         this.devService.update(this.dev).subscribe(
           () => {
             this.interactionsService.toastStatus('success', 'Sucesso!', 'Desenvolvedor inserido com sucesso!!', 3000);
-            this.router.navigate(["nivel"]);
+            this.router.navigate(["desenvolvedor"]);
           },
           error => {
             // console.log(error);
