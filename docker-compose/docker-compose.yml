@@ -13,3 +13,28 @@ services:
       MYSQL_PASSWORD: 123
       MYSQL_ROOT_PASSWORD: 123
       MYSQL_DATABASE: dev-manager
+  dev-manager-api:
+    image: dev-manager-api:latest
+    container_name: dev-manager-api
+    restart: always
+    depends_on:
+      - dev-manager-db
+    environment:
+      DB_HOST: dev-manager-db
+      DB_PORT: 3306
+      DB_USERNAME: root
+      DB_PASSWORD: 123
+      DB_NAME: dev-manager
+    ports:
+      - 3000:3000
+    links:
+      - dev-manager-db
+  dev-manager-front:
+    image: dev-manager-front:latest
+    build: '.'
+    ports:
+      - 80:80
+    depends_on:
+      - dev-manager-api
+    links:
+      - dev-manager-api
