@@ -54,7 +54,7 @@ export class DesenvolvedorComponent implements OnInit {
 
   apagar(dev: Desenvolvedor) {
     // console.log(`Apagar id ${dev.id}`);
-    this.interactionsService.confirmarSimNao("Atenção", `Deseja realmente excluir o item ${dev.id} - ${dev.nivel} ?`, () => this.excluir(dev.id!), () => null)
+    this.interactionsService.confirmarSimNao("Atenção", `Deseja realmente excluir o item ${dev.id} - ${dev.nome} ?`, () => this.excluir(dev.id!), () => null)
   }
 
   excluir(id:number){
