@@ -17,4 +17,9 @@ export class Nivel {
     })
     nivel: string;
 
+    constructor(nivel?:Partial<Nivel>){
+        this.id = nivel?.id;
+        this.nivel = nivel?.nivel;
+    }
+
 }

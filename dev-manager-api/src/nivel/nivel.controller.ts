@@ -4,7 +4,7 @@ import { CreateNivelDto } from './dto/create-nivel.dto';
 import { UpdateNivelDto } from './dto/update-nivel.dto';
 import { validate } from 'class-validator';
 import { Response } from 'express';
-import { DesenvolvedorService } from 'src/desenvolvedor/desenvolvedor.service';
+import { DesenvolvedorService } from '../desenvolvedor/desenvolvedor.service';
 import { ApiTags } from '@nestjs/swagger';
 import { Nivel } from './entities/nivel.entity';
 import { Pagination } from 'nestjs-typeorm-paginate';

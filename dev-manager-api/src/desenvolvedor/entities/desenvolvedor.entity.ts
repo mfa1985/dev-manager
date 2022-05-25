@@ -1,7 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { Type } from "class-transformer";
 import { IsDateString, IsInt, IsNotEmpty, MaxLength, MinLength } from "class-validator";
-import { Nivel } from "src/nivel/entities/nivel.entity";
+import { Nivel } from "../../nivel/entities/nivel.entity";
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()

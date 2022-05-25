@@ -5,7 +5,7 @@ import { CreateNivelDto } from './dto/create-nivel.dto';
 import { UpdateNivelDto } from './dto/update-nivel.dto';
 import { Nivel } from './entities/nivel.entity';
 import { IPaginationOptions, paginate, Pagination } from 'nestjs-typeorm-paginate';
-import { Desenvolvedor } from 'src/desenvolvedor/entities/desenvolvedor.entity';
+import { Desenvolvedor } from '../desenvolvedor/entities/desenvolvedor.entity';
 
 @Injectable()
 export class NivelService {
